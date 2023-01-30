@@ -1,38 +1,37 @@
-﻿namespace Domain.Models.Vehicles
+﻿namespace Domain.Models.Vehicles;
+
+public class Vehicle
 {
-    public class Vehicle
+    private readonly int _maxPassengers;
+
+    protected Vehicle(int maxPassengers)
     {
-        private readonly int _maxPassengers;
+        _maxPassengers = maxPassengers;
+    }
 
-        protected Vehicle(int maxPassengers)
+    protected bool VehicleRunning { get; private set; }
+
+
+    public void Start(IEnumerable<Person> passengers)
+    {
+        if (passengers == null) throw new ArgumentNullException(nameof(passengers));
+
+        var passengersArray = passengers.ToArray();
+        if (passengersArray.Length > _maxPassengers)
         {
-            _maxPassengers = maxPassengers;
+            throw new Exception("Too many passengers");
         }
 
-        protected bool VehicleRunning { get; private set; }
+        VehicleRunning = true;
+    }
 
-
-        public void Start(IEnumerable<Person> passengers)
+    public void StartWithEmptyPeople(int peopleCount)
+    {
+        if (peopleCount < 1)
         {
-            if (passengers == null) throw new ArgumentNullException(nameof(passengers));
-
-            var passengersArray = passengers.ToArray();
-            if (passengersArray.Length > _maxPassengers)
-            {
-                throw new Exception("Too many passengers");
-            }
-
-            VehicleRunning = true;
+            throw new ArgumentException("People count must be at least 1");
         }
 
-        public void StartWithEmptyPeople(int peopleCount)
-        {
-            if (peopleCount < 1)
-            {
-                throw new ArgumentException("People count must be at least 1");
-            }
-
-            Start(Enumerable.Range(1, peopleCount).Select(_ => new Person()));
-        }
+        Start(Enumerable.Range(1, peopleCount).Select(_ => new Person()));
     }
 }

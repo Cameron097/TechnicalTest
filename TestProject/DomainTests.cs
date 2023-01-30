@@ -4,58 +4,57 @@ using FluentAssertions;
 using Xunit;
 
 
-namespace TestProject
+namespace TestProject;
+
+public class DomainTests
 {
-    public class DomainTests
+    [Fact]
+    public void VehicleInitialized_StartWith0People_ShouldThrowArgumentException()
     {
-        [Fact]
-        public void VehicleInitialized_StartWith0People_ShouldThrowArgumentException()
-        {
-            var vehicle = new VehicleStub();
-            vehicle.Invoking(x => x.StartWithEmptyPeople(0)).Should().Throw<ArgumentException>()
-                .WithMessage("People count must be at least 1");
-        }
+        var vehicle = new VehicleStub();
+        vehicle.Invoking(x => x.StartWithEmptyPeople(0)).Should().Throw<ArgumentException>()
+            .WithMessage("People count must be at least 1");
+    }
 
-        [Fact]
-        public void VehicleInitializedMax10_StartWith15People_ShouldThrowException()
-        {
-            var vehicle = new VehicleStub();
-            vehicle.Invoking(x => x.StartWithEmptyPeople(15)).Should().Throw<Exception>()
-                .WithMessage("Too many passengers");
-        }
+    [Fact]
+    public void VehicleInitializedMax10_StartWith15People_ShouldThrowException()
+    {
+        var vehicle = new VehicleStub();
+        vehicle.Invoking(x => x.StartWithEmptyPeople(15)).Should().Throw<Exception>()
+            .WithMessage("Too many passengers");
+    }
 
-        [Fact]
-        public void VehicleInitializedMax10_StartWith5_ShouldNotThrow()
-        {
-            var vehicle = new VehicleStub();
-            vehicle.Invoking(x => x.StartWithEmptyPeople(5)).Should().NotThrow();
-        }
+    [Fact]
+    public void VehicleInitializedMax10_StartWith5_ShouldNotThrow()
+    {
+        var vehicle = new VehicleStub();
+        vehicle.Invoking(x => x.StartWithEmptyPeople(5)).Should().NotThrow();
+    }
 
 
-        private class VehicleStub : Vehicle
+    private class VehicleStub : Vehicle
+    {
+        public VehicleStub() : base(10)
         {
-            public VehicleStub() : base(10)
-            {
                 
-            }
-
-            public bool TestVehicleRunning => VehicleRunning;
         }
 
-        [Fact]
-        public void VehicleStubInitialized_StartWith5_ShouldSetVehicleStartedToTrue()
-        {
-            var vehicle = new VehicleStub();
-            vehicle.StartWithEmptyPeople(5);
-            vehicle.TestVehicleRunning.Should().BeTrue();
-        }
+        public bool TestVehicleRunning => VehicleRunning;
+    }
+
+    [Fact]
+    public void VehicleStubInitialized_StartWith5_ShouldSetVehicleStartedToTrue()
+    {
+        var vehicle = new VehicleStub();
+        vehicle.StartWithEmptyPeople(5);
+        vehicle.TestVehicleRunning.Should().BeTrue();
+    }
 
 
-        [Fact]
-        public void VehicleStubInitialized_DoNotStart_VehicleStartedShouldBeFalse()
-        {
-            var vehicle = new VehicleStub();
-            vehicle.TestVehicleRunning.Should().BeFalse();
-        }
+    [Fact]
+    public void VehicleStubInitialized_DoNotStart_VehicleStartedShouldBeFalse()
+    {
+        var vehicle = new VehicleStub();
+        vehicle.TestVehicleRunning.Should().BeFalse();
     }
 }
