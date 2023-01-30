@@ -1,0 +1,17 @@
+Tech Test!
+
+The C# solution comprises of 2 areas
+
+Please spend no more than 1 hour working on this.
+
+1 - Fix Errors
+* There is a runtime bug.
+* Please add comments in the relevant places to the code, describe how you fixed the problem, why the problem happened and any code improvements.
+
+2 - Refactoring Task
+* Here is an API that needs refactoring.
+* Please refactor the API and its dependant projects.
+* Please add at least one meaningful unit test.
+* Can you write some brief notes in a text file, explaining your code refactoring, any problems you see with the API and also include any work you didn't have time to complete.
+
+  
