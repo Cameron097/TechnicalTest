@@ -1,4 +1,5 @@
 ﻿using Domain.Models.Vehicles;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {

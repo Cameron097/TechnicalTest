@@ -1,0 +1,23 @@
+Refactoring Notes
+- Built base vehicle class which contains all necessary logic that pertains to a vehicle
+
+- Left in specific properties for *Vehicle*Running in each subclass which references a protected property from the base vehicle class as to not change the original properties from the given classes
+	however making the VehicleRunning property public and removing these would probably make more sense (could be less readable however)
+
+- Base class takes in max passengers for a given vehicle
+
+- Generic method within AddPassengersToVehicleController which adds empty people to a vehicle of the given type when that endpoint is called.
+
+
+
+Problems with the API
+
+- Seperate endpoints required for adding passengers to seperate vehicles rather than one which can interpret the vehicle the passengers would be added to
+
+- HttpGet used when it seems as if post/put would be more relevent as something is being added or updated.
+
+- No real output i.e. database behind the api.
+
+- No feedback to the user other than OK.
+
+- While authorization is added to the web app the attributes are not used in the controller

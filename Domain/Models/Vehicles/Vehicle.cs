@@ -4,7 +4,7 @@
     {
         private readonly int _maxPassengers;
 
-        public Vehicle(int maxPassengers)
+        protected Vehicle(int maxPassengers)
         {
             _maxPassengers = maxPassengers;
         }
@@ -32,7 +32,7 @@
                 throw new ArgumentException("People count must be at least 1");
             }
 
-            Start(Enumerable.Range(1, peopleCount).Select(x => new Person()));
+            Start(Enumerable.Range(1, peopleCount).Select(_ => new Person()));
         }
     }
 }

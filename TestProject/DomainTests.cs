@@ -11,7 +11,7 @@ namespace TestProject
         [Fact]
         public void VehicleInitialized_StartWith0People_ShouldThrowArgumentException()
         {
-            var vehicle = new Vehicle(10);
+            var vehicle = new VehicleStub();
             vehicle.Invoking(x => x.StartWithEmptyPeople(0)).Should().Throw<ArgumentException>()
                 .WithMessage("People count must be at least 1");
         }
@@ -19,7 +19,7 @@ namespace TestProject
         [Fact]
         public void VehicleInitializedMax10_StartWith15People_ShouldThrowException()
         {
-            var vehicle = new Vehicle(10);
+            var vehicle = new VehicleStub();
             vehicle.Invoking(x => x.StartWithEmptyPeople(15)).Should().Throw<Exception>()
                 .WithMessage("Too many passengers");
         }
@@ -27,12 +27,12 @@ namespace TestProject
         [Fact]
         public void VehicleInitializedMax10_StartWith5_ShouldNotThrow()
         {
-            var vehicle = new Vehicle(10);
+            var vehicle = new VehicleStub();
             vehicle.Invoking(x => x.StartWithEmptyPeople(5)).Should().NotThrow();
         }
 
 
-        public class VehicleStub : Vehicle
+        private class VehicleStub : Vehicle
         {
             public VehicleStub() : base(10)
             {
